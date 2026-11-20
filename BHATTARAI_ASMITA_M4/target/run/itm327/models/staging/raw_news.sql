@@ -1,5 +1,5 @@
 
-  create or replace   view PROJECT_DB.STAGING.raw_news_BHATTARAI_A
+  create or replace   view PROJECT_DB.MODELED.raw_news_BHATTARAI_A
   
    as (
     -- Staging: financial news articles, one row per article ID

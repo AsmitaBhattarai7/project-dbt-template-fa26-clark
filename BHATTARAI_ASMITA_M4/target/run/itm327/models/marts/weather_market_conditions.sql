@@ -2,15 +2,15 @@
   
     
 
-        create or replace transient table PROJECT_DB.STAGING.weather_market_conditions_BHATTARAI_A
+        create or replace transient table PROJECT_DB.MODELED.weather_market_conditions_BHATTARAI_A
          as
         (-- ============================================================
 -- weather_market_conditions
 -- DA Mart: daily weather at financial hub cities alongside
 --          broad market performance
 -- Grain: CITY + DATE
--- Sources: PROJECT_DB.STAGING.fct_daily_weather_BHATTARAI_A, PROJECT_DB.STAGING.dim_weather_cities_BHATTARAI_A,
---          PROJECT_DB.STAGING.fct_daily_stocks_BHATTARAI_A, PROJECT_DB.STAGING.dim_date_BHATTARAI_A
+-- Sources: PROJECT_DB.MODELED.fct_daily_weather_BHATTARAI_A, PROJECT_DB.MODELED.dim_weather_cities_BHATTARAI_A,
+--          PROJECT_DB.MODELED.fct_daily_stocks_BHATTARAI_A, PROJECT_DB.MODELED.dim_date_BHATTARAI_A
 -- Client: Data Analyst — exploring weather vs market correlations
 -- ============================================================
 --

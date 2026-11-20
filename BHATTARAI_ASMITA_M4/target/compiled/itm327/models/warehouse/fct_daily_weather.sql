@@ -2,7 +2,7 @@
 -- fct_daily_weather
 -- Fact table: one row per city per observation day
 -- Grain: CITY + DATE
--- Source: PROJECT_DB.STAGING.raw_weather_BHATTARAI_A
+-- Source: PROJECT_DB.MODELED.raw_weather_BHATTARAI_A
 -- ============================================================
 --
 -- Accepts cleaned weather readings from staging into the warehouse
@@ -27,5 +27,24 @@
 --
 -- ============================================================
 
--- TODO: Write your SELECT statement below
-select 1 as placeholder  -- placeholder so the template compiles; DELETE this line when you write your own SELECT
+SELECT
+    -- Keys (grain: one row per CITY + DATE)
+    DATE,
+    CITY,
+
+    -- Weather measurements
+    MAX_TEMP,
+    MIN_TEMP,
+    PRECIP,
+    MAX_WIND,
+
+    -- Extra measurements from my pipeline (so marts inherit them)
+    MAX_GUST,
+    RAIN,
+    SNOWFALL,
+    PRECIP_HOURS,
+    AVG_TEMP_C,
+    TEMP_RANGE_C,
+    IS_RAINY
+
+FROM PROJECT_DB.MODELED.raw_weather_BHATTARAI_A

@@ -27,5 +27,24 @@
 --
 -- ============================================================
 
--- TODO: Write your SELECT statement below
-select 1 as placeholder  -- placeholder so the template compiles; DELETE this line when you write your own SELECT
+SELECT
+    -- Keys (grain: one row per CITY + DATE)
+    DATE,
+    CITY,
+
+    -- Weather measurements
+    MAX_TEMP,
+    MIN_TEMP,
+    PRECIP,
+    MAX_WIND,
+
+    -- Extra measurements from my pipeline (so marts inherit them)
+    MAX_GUST,
+    RAIN,
+    SNOWFALL,
+    PRECIP_HOURS,
+    AVG_TEMP_C,
+    TEMP_RANGE_C,
+    IS_RAINY
+
+FROM {{ ref('raw_weather') }}

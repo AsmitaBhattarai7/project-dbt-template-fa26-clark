@@ -2,13 +2,13 @@
   
     
 
-        create or replace transient table PROJECT_DB.STAGING.dim_symbols_BHATTARAI_A
+        create or replace transient table PROJECT_DB.MODELED.dim_symbols_BHATTARAI_A
          as
         (-- ============================================================
 -- dim_symbols
 -- Dimension table: one row per unique stock symbol
 -- Grain: SYMBOL
--- Source: PROJECT_DB.STAGING.raw_stocks_BHATTARAI_A
+-- Source: PROJECT_DB.MODELED.raw_stocks_BHATTARAI_A
 -- ============================================================
 --
 -- Contains descriptive attributes about each ticker derived from
@@ -51,8 +51,25 @@
 --
 -- ============================================================
 
--- TODO: Write your SELECT statement below
-select 1 as placeholder  -- placeholder so the template compiles; DELETE this line when you write your own SELECT
+SELECT
+    -- Key (grain: one row per SYMBOL)
+    SYMBOL,
+
+    -- Date range this symbol appears in my data
+    MIN(TRADE_DATE)                 AS FIRST_SEEN_DATE,
+    MAX(TRADE_DATE)                 AS LAST_SEEN_DATE,
+    COUNT(DISTINCT TRADE_DATE)      AS TOTAL_TRADING_DAYS,
+
+    -- Price statistics across the full history
+    MAX(HIGH)                       AS ALL_TIME_HIGH,
+    MIN(LOW)                        AS ALL_TIME_LOW,
+    ROUND(AVG(CLOSE), 4)            AS AVG_CLOSE_PRICE,
+
+    -- Volume
+    ROUND(AVG(VOLUME), 0)           AS AVG_DAILY_VOLUME
+
+FROM PROJECT_DB.MODELED.raw_stocks_BHATTARAI_A
+GROUP BY SYMBOL
         );
       
   

@@ -1,5 +1,5 @@
 
-  create or replace   view PROJECT_DB.STAGING.raw_stocks_BHATTARAI_A
+  create or replace   view PROJECT_DB.MODELED.raw_stocks_BHATTARAI_A
   
    as (
     -- Staging: daily stock prices, one row per SYMBOL + TRADE_DATE

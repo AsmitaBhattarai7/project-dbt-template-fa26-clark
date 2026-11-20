@@ -2,7 +2,7 @@
 -- dim_weather_cities
 -- Dimension table: one row per financial hub city
 -- Grain: CITY
--- Source: PROJECT_DB.STAGING.raw_weather_BHATTARAI_A
+-- Source: PROJECT_DB.MODELED.raw_weather_BHATTARAI_A
 -- ============================================================
 --
 -- Contains climatological statistics for each city tracked by
@@ -43,5 +43,33 @@
 --
 -- ============================================================
 
--- TODO: Write your SELECT statement below
-select 1 as placeholder  -- placeholder so the template compiles; DELETE this line when you write your own SELECT
+SELECT
+    -- Key (grain: one row per CITY)
+    CITY,
+
+    -- Which stock exchange this financial hub is home to
+    CASE CITY
+        WHEN 'New York' THEN 'NYSE / NASDAQ'
+        WHEN 'London'   THEN 'LSE'
+        WHEN 'Tokyo'    THEN 'TSE'
+        ELSE 'UNKNOWN'
+    END                                 AS EXCHANGE,
+
+    -- Date range this city appears in my weather data
+    MIN(DATE)                           AS FIRST_OBSERVATION_DATE,
+    MAX(DATE)                           AS LAST_OBSERVATION_DATE,
+    COUNT(DISTINCT DATE)                AS TOTAL_OBSERVATION_DAYS,
+
+    -- Typical conditions (averages across full history)
+    ROUND(AVG(MAX_TEMP), 2)             AS AVG_MAX_TEMP,
+    ROUND(AVG(MIN_TEMP), 2)             AS AVG_MIN_TEMP,
+    ROUND(AVG(PRECIP), 2)               AS AVG_DAILY_PRECIP,
+    ROUND(AVG(MAX_WIND), 2)             AS AVG_MAX_WIND,
+
+    -- Extreme conditions
+    MAX(MAX_TEMP)                       AS HOTTEST_DAY_TEMP,
+    MIN(MIN_TEMP)                       AS COLDEST_DAY_TEMP,
+    MAX(PRECIP)                         AS WETTEST_DAY_PRECIP
+
+FROM PROJECT_DB.MODELED.raw_weather_BHATTARAI_A
+GROUP BY CITY

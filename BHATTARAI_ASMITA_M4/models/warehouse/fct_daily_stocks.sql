@@ -35,5 +35,27 @@
 --
 -- ============================================================
 
--- TODO: Write your SELECT statement below
-select 1 as placeholder  -- placeholder so the template compiles; DELETE this line when you write your own SELECT
+SELECT
+    -- Keys (grain: one row per SYMBOL + TRADE_DATE)
+    SYMBOL,
+    TRADE_DATE,
+
+    -- Price metrics
+    OPEN,
+    HIGH,
+    LOW,
+    CLOSE,
+    VOLUME,
+
+    -- Derived price metrics
+    ROUND(HIGH - LOW, 4)                                    AS DAILY_RANGE,
+    ROUND(CLOSE - OPEN, 4)                                  AS DAILY_CHANGE,
+    ROUND(DIV0(CLOSE - OPEN, OPEN) * 100, 4)                AS PCT_CHANGE,
+    CASE
+        WHEN CLOSE > OPEN THEN 'UP'
+        WHEN CLOSE < OPEN THEN 'DOWN'
+        ELSE 'FLAT'
+    END                                                     AS DIRECTION
+
+FROM {{ ref('raw_stocks') }}
+

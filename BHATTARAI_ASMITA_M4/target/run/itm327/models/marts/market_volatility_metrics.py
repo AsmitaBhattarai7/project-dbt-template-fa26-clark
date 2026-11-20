@@ -121,11 +121,11 @@ class config:
 class this:
     """dbt.this() or dbt.this.identifier"""
     database = "PROJECT_DB"
-    schema = "STAGING"
+    schema = "MODELED"
     identifier = "market_volatility_metrics_BHATTARAI_A"
     
     def __repr__(self):
-        return 'PROJECT_DB.STAGING.market_volatility_metrics_BHATTARAI_A'
+        return 'PROJECT_DB.MODELED.market_volatility_metrics_BHATTARAI_A'
 
 
 class dbtObj:
@@ -152,7 +152,7 @@ def materialize(session, df, target_relation):
           # session.write_pandas does not have overwrite function
           df = session.createDataFrame(df)
     
-    df.write.mode("overwrite").save_as_table('PROJECT_DB.STAGING.market_volatility_metrics_BHATTARAI_A', table_type='transient')
+    df.write.mode("overwrite").save_as_table('PROJECT_DB.MODELED.market_volatility_metrics_BHATTARAI_A', table_type='transient')
 
 def main(session):
     dbt = dbtObj(session.table)

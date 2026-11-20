@@ -117,11 +117,11 @@ class config:
 class this:
     """dbt.this() or dbt.this.identifier"""
     database = "PROJECT_DB"
-    schema = "STAGING"
+    schema = "MODELED"
     identifier = "market_volatility_metrics_BHATTARAI_A"
     
     def __repr__(self):
-        return 'PROJECT_DB.STAGING.market_volatility_metrics_BHATTARAI_A'
+        return 'PROJECT_DB.MODELED.market_volatility_metrics_BHATTARAI_A'
 
 
 class dbtObj:

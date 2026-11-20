@@ -2,7 +2,7 @@
 -- dim_news
 -- Dimension table: one row per news article
 -- Grain: ID (unique article identifier)
--- Source: PROJECT_DB.STAGING.raw_news_BHATTARAI_A
+-- Source: PROJECT_DB.MODELED.raw_news_BHATTARAI_A
 -- ============================================================
 --
 -- News articles are dimension data — they are rich with descriptive
@@ -47,5 +47,20 @@
 --
 -- ============================================================
 
--- TODO: Write your SELECT statement below
-select 1 as placeholder  -- placeholder so the template compiles; DELETE this line when you write your own SELECT
+SELECT
+    -- Primary key (grain: one row per article)
+    ID,
+
+    -- Foreign keys
+    TRIM(UPPER(SYMBOL))             AS SYMBOL,      -- same standardization as raw_stocks / dim_symbols
+    PUBLISHED_AT::DATE              AS DATE_KEY,    -- joins to dim_date
+
+    -- Descriptive attributes
+    PUBLISHED_AT::TIMESTAMP_NTZ     AS PUBLISHED_AT,
+    HEADLINE,
+    CATEGORY,
+    SOURCE,
+    SUMMARY,
+    URL
+
+FROM PROJECT_DB.MODELED.raw_news_BHATTARAI_A

@@ -2,8 +2,8 @@
 -- stock_news_daily
 -- DA Mart: daily stock performance enriched with news coverage
 -- Grain: SYMBOL + TRADE_DATE
--- Sources: PROJECT_DB.STAGING.fct_daily_stocks_BHATTARAI_A, PROJECT_DB.STAGING.dim_news_BHATTARAI_A,
---          PROJECT_DB.STAGING.dim_symbols_BHATTARAI_A, PROJECT_DB.STAGING.dim_date_BHATTARAI_A
+-- Sources: PROJECT_DB.MODELED.fct_daily_stocks_BHATTARAI_A, PROJECT_DB.MODELED.dim_news_BHATTARAI_A,
+--          PROJECT_DB.MODELED.dim_symbols_BHATTARAI_A, PROJECT_DB.MODELED.dim_date_BHATTARAI_A
 -- Client: Data Analyst — queried in SQL and BI tools
 -- ============================================================
 --
